@@ -1,0 +1,26 @@
+<!-- summarize.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Summarize Text - TextHelp{% endblock %}
+
+{% block content %}
+    <div class="flex justify-center">
+        <div class="w-1/2 p-4 bg-white rounded shadow-md">
+            <h2 class="text-3xl font-bold mb-4">Text Summarization</h2>
+            <form action="{% url 'summarize' %}" method="post">
+                {% csrf_token %}
+                <textarea name="text" rows="10" placeholder="Paste your text here" 
+class="w-full h-[70vh] p-4"></textarea>
+                <button type="submit" class="bg-gray-200 hover:bg-gray-300 text-black font-bold 
+py-2 px-4 rounded">Summarize</button>
+            </form>
+        </div>
+        <div class="w-1/2 p-4 bg-white rounded shadow-md h-[70vh]">
+            {% if summary %}
+                <h2 class="text-3xl font-bold mb-4">Summary</h2>
+                <p>{{ summary }}</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!-- text_to_audio.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Text to Audio - TextHelp{% endblock %}
+
+{% block content %}
+<div class="flex justify-center">
+    <div class="w-1/2 p-4 bg-white rounded shadow-md">
+        <h2 class="text-3xl font-bold mb-4">Text to Audio</h2>
+        <form action="{% url 'textToAudio' %}" method="post">
+            {% csrf_token %}
+            <textarea name="text" rows="10" placeholder="Enter text to convert to audio" class="w-full h-[70vh] p-4"></textarea>
+            <button type="submit" class="bg-gray-200 hover:bg-gray-300 text-black font-bold py-2 px-4 rounded">Convert to Audio</button>
+        </form>
+    </div>
+    <div class="w-1/2 p-4 bg-white rounded shadow-md h-[70vh]">
+        {% if audio_file_url %}
+            <h3>Audio File</h3>
+            <audio controls>
+                <source src="{{ audio_file_url }}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
